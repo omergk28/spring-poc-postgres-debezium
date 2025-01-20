@@ -1,6 +1,6 @@
-spring.application.name: OrderService
-
-spring.datasource:
+spring:
+  application.name: OrderService
+  datasource:
     url: jdbc:postgresql://localhost:5432/orderdb
     username: postgres
     password: postgres
