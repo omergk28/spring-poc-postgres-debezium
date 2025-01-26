@@ -1,5 +1,8 @@
 spring:
   application.name: OrderService
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
   datasource:
     url: jdbc:postgresql://localhost:5432/orderdb
     username: postgres

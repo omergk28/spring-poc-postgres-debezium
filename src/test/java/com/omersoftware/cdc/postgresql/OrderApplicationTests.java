@@ -1,4 +1,4 @@
-package com.omersw.cdc.postgresql;
+package com.omersoftware.cdc.postgresql;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
