@@ -31,6 +31,12 @@ docker-compose up
 ./gradlew bootRun
 ```
 
+3. Configure Debezium Connector
+
+```shell
+curl -X POST -H "Content-Type: application/json" --data @debezium-connector.json http://localhost:8083/connectors
+```
+
 ## Note
 
 Kafka [cluster setup](https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml) is taken from official Kafka Docker image repository. See [Multi Node Cluster/Isolated](https://github.com/apache/kafka/tree/trunk/docker/examples#multi-node-cluster) section for more details.
