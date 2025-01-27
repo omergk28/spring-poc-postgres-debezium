@@ -1,0 +1,14 @@
+### Create Order
+POST http://127.0.0.1:8081/
+Content-Type: application/json
+
+{
+    "customerName": "Omer Kocaoglu",
+    "customerEmail": "omersw@email.com",
+    "customerAddress": {
+        "street": "1234 Elm St",
+        "city": "Springfield",
+        "state": "IL",
+        "zip": "62701"
+    }
+}
