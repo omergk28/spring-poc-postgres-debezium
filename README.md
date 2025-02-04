@@ -9,7 +9,7 @@ graph TD
     C[Debezium] -->|JDBC| B[(PostgreSQL)]
     B[(PostgreSQL)] -->|Change Events| C[Debezium]
     C[Debezium] -->|Change Events| D[(Kafka)]
-    D[(Kafka)] -->|Change Events| E[FulfillmentService]
+    D[(Kafka)] -->|Change Events| E[OrderEventListener]
 ```
 
 ## Prerequisites
