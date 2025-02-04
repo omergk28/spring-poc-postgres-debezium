@@ -19,6 +19,7 @@ public class OrderService {
 
     @PostMapping
     public Order createOrder(@RequestBody OrderRequest request) {
+        log.info("Creating order: {}", request);
         return orderRepository.save(Order.builder()
                 .customerName(request.getCustomerName())
                 .customerEmail(request.getCustomerEmail())

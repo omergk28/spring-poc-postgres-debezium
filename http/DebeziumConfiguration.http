@@ -1,0 +1,22 @@
+### Configure Debezium
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "order-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "orderdb",
+    "database.server.name": "orderdb_server",
+    "plugin.name": "pgoutput",
+    "slot.name": "debezium_slot",
+    "publication.name": "debezium_publication",
+    "publication.autocreate.mode": "all_tables",
+    "topic.prefix": "cdc"
+  }
+}
