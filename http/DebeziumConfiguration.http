@@ -15,8 +15,14 @@ Content-Type: application/json
     "database.server.name": "orderdb_server",
     "plugin.name": "pgoutput",
     "slot.name": "debezium_slot",
-    "publication.name": "debezium_publication",
-    "publication.autocreate.mode": "all_tables",
+    "publication.name": "order_publication",
+    "publication.autocreate.mode": "filtered",
+    "schema.include.list": "orderdb",
+    "table.include.list": "orderdb.order",
     "topic.prefix": "cdc"
   }
 }
+
+
+### Delete Configuration
+DELETE http://localhost:8083/connectors/order-connector

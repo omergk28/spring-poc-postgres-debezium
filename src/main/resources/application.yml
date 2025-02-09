@@ -1,5 +1,5 @@
-server.context-path: /order-api
 server.port: 8081
+server.servlet.context-path: /order-api
 
 spring:
   application.name: OrderService

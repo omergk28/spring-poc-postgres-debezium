@@ -1,5 +1,5 @@
 ### Create Order
-POST http://127.0.0.1:8081/
+POST http://127.0.0.1:8081/order-api/orders
 Content-Type: application/json
 
 {

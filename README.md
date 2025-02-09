@@ -12,10 +12,14 @@ graph TD
     D[(Kafka)] -->|Change Events| E[FulfillmentService]
 ```
 
-## Prerequisites
+## Requirements
 
-- Docker Compose
+You need to have the following installed on your machine:
+
+- Docker
 - Java 21
+- Gradle 
+- flyway
 
 ## How to run
 
@@ -33,8 +37,48 @@ docker-compose up
 
 3. Configure Debezium Connector
 
+Use [http/DebeziumConnector.http](http/DebeziumConnector.http) collection to create a Debezium connector.
+
+Alternatively, you can use the following command to create a Debezium connector:
+
 ```shell
-curl -X POST -H "Content-Type: application/json" --data @debezium-connector.json http://localhost:8083/connectors
+curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" localhost:8083/connectors/ -d '{
+   "name": "order-connector",
+   "config": {
+     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+     "tasks.max": "1",
+     "database.hostname": "postgres",
+     "database.port": "5432",
+     "database.user": "postgres",
+     "database.password": "postgres",
+     "database.dbname": "orderdb",
+     "database.server.name": "orderdb_server",
+     "plugin.name": "pgoutput",
+     "slot.name": "debezium_slot",
+     "publication.name": "order_publication",
+     "publication.autocreate.mode": "filtered",
+     "schema.include.list": "orderdb",
+     "table.include.list": "orderdb.order",
+     "topic.prefix": "cdc"
+   }
+ }'
+```
+
+4. Use [http/OrderApplication.http](http/OrderApplication.http) collection to create orders and observe incoming CDC events in Logs.
+
+Alternatively, you can use the following command to create an order:
+
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+    "customerName": "Omer Kocaoglu",
+    "customerEmail": "omersw@email.com",
+    "customerAddress": {
+        "street": "1234 Elm St",
+        "city": "Springfield",
+        "state": "IL",
+        "zip": "62701"
+    }
+}' http://localhost:8081/order-api/orders
 ```
 
 ## Note

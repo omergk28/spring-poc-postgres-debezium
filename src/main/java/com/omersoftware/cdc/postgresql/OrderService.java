@@ -7,7 +7,8 @@ import org.springframework.web.client.RestClientResponseException;
 import java.util.List;
 import java.util.UUID;
 
-@RestController("/order")
+@RestController
+@RequestMapping("/orders")
 @Slf4j
 public class OrderService {
 
