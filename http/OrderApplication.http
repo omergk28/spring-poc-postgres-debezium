@@ -12,3 +12,25 @@ Content-Type: application/json
         "zip": "62701"
     }
 }
+
+### Get Order
+GET http://127.0.0.1:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
+
+### Update Order
+POST http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
+Content-Type: application/json
+
+{
+  "customerName": "Updated John Doe",
+  "customerEmail": "jd2@email.com",
+  "customerAddress": {
+    "zip": "62701",
+    "city": "Springfield",
+    "state": "IL",
+    "street": "1234 Elm St"
+  },
+  "status": "REJECTED"
+}
+
+### Delete Order
+DELETE http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6

@@ -87,9 +87,11 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
  }'
 ```
 
-4. Use [http/OrderApplication.http](http/OrderApplication.http) collection to create orders and observe incoming CDC events in Logs.
+4. Use [http/OrderApplication.http](http/OrderApplication.http) collection to create/update/delete orders and observe incoming CDC events in Logs.
 
-Alternatively, you can use the following command to create an order:
+Alternatively, you can use the following curl commands: 
+
+ * create an order
 
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -102,6 +104,28 @@ curl -X POST -H "Content-Type: application/json" -d '{
         "zip": "62701"
     }
 }' http://localhost:8081/order-api/orders
+```
+
+ * update an order (only status can be updated)
+    
+```shell
+curl -X POST -H "Content-Type: application/json" -d '{
+    "customerName": "Omer Kocaoglu",
+    "customerEmail": "e@mail.com",
+    "customerAddress": {
+        "street": "1234 Elm St",
+        "city": "Springfield",
+        "state": "IL",
+        "zip": "62701"
+    },
+    "status": "FULFILLED"
+    }' http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
+```
+
+ * delete an order
+
+```shell
+curl -X DELETE http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
 ```
 
 ## Note

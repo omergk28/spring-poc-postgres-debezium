@@ -1,18 +1,19 @@
 package com.omersoftware.cdc.postgresql;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientResponseException;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -39,30 +40,21 @@ public class OrderService {
     }
 
     @GetMapping("/{orderId}")
-    public Order getOrder(UUID orderId) {
+    public Order getOrder(@PathVariable("orderId") UUID orderId) {
         return orderRepository.findById(orderId).orElseThrow(() -> new RestClientResponseException("Order not found", 404, "Order not found", null, null, null));
     }
 
     @PostMapping("/{orderId}")
-    public Order updateOrder(UUID orderId, Order order) {
+    public Order updateOrder(@PathVariable("orderId") UUID orderId, @Valid @RequestBody OrderRequest request) {
         Order existingOrder = getOrder(orderId);
-        existingOrder.setStatus(order.getStatus());
+        existingOrder.setStatus(request.getStatus());
         return orderRepository.save(existingOrder);
     }
 
     @DeleteMapping("/{orderId}")
-    public void deleteOrder(@Valid @NotBlank UUID orderId) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable("orderId") UUID orderId) {
         orderRepository.deleteById(orderId);
-    }
-
-    @GetMapping
-    public List<Order> getOrders() {
-        return orderRepository.findAll();
-    }
-
-    @GetMapping("/status/{status}")
-    public List<Order> getOrdersByStatus(OrderStatus status) {
-        return orderRepository.findAllByStatus(status);
     }
 
 }
