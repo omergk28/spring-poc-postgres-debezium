@@ -1,7 +1,7 @@
 # spring-poc-postgres-debezium
-This is a proof of concept Change Data Capture using Debezium and PostgreSQL 
+This is a proof of concept Change Data Capture using Debezium and PostgreSQL.
 
-Following diagram shows a quick overview of the architecture:
+## Architecture
 
 ```mermaid
 graph TD
@@ -12,7 +12,29 @@ graph TD
     D[(Kafka)] -->|Change Events| E[OrderEventListener]
 ```
 
-## Requirements
+## Components
+
+```mermaid
+graph TD
+    A[controller-1] -->|Quorum| B[controller-2]
+    B[controller-2] -->|Quorum| C[controller-3]
+    C[controller-3] -->|Quorum| A[controller-1]
+    D[kafka-1] -->|Broker| A[controller-1]
+    D[kafka-1] -->|Broker| B[controller-2]
+    D[kafka-1] -->|Broker| C[controller-3]
+    E[kafka-2] -->|Broker| A[controller-1]
+    E[kafka-2] -->|Broker| B[controller-2]
+    E[kafka-2] -->|Broker| C[controller-3]
+    F[kafka-3] -->|Broker| A[controller-1]
+    F[kafka-3] -->|Broker| B[controller-2]
+    F[kafka-3] -->|Broker| C[controller-3]
+    G[postgres] -->|Database| H[debezium]
+    H[debezium] -->|Connect| D[kafka-1]
+    H[debezium] -->|Connect| E[kafka-2]
+    H[debezium] -->|Connect| F[kafka-3]
+```
+
+## Requirements to Run 
 
 You need to have the following installed on your machine:
 
@@ -20,6 +42,7 @@ You need to have the following installed on your machine:
 - Java 21
 - Gradle 
 - flyway
+- curl
 
 ## How to run
 

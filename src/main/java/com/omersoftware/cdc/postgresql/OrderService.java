@@ -1,7 +1,15 @@
 package com.omersoftware.cdc.postgresql;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientResponseException;
 
 import java.util.List;
@@ -10,6 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/orders")
 @Slf4j
+@Validated
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -19,7 +28,7 @@ public class OrderService {
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody OrderRequest request) {
+    public Order createOrder(@Valid @RequestBody OrderRequest request) {
         log.info("Creating order: {}", request);
         return orderRepository.save(Order.builder()
                 .customerName(request.getCustomerName())
@@ -42,7 +51,7 @@ public class OrderService {
     }
 
     @DeleteMapping("/{orderId}")
-    public void deleteOrder(UUID orderId) {
+    public void deleteOrder(@Valid @NotBlank UUID orderId) {
         orderRepository.deleteById(orderId);
     }
 
