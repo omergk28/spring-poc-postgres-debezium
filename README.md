@@ -41,7 +41,6 @@ You need to have the following installed on your machine:
 - Docker
 - Java 21
 - Gradle 
-- flyway
 - curl
 
 ## How to run
