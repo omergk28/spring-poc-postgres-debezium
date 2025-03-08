@@ -55,6 +55,9 @@ spotless {
 	}
 }
 
+// auto format code before compileJava task
+tasks.compileJava.dependsOn(spotlessApply)
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

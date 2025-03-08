@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/orders")
@@ -44,10 +44,7 @@ public class OrderService {
   public Order getOrder(@PathVariable("orderId") UUID orderId) {
     return orderRepository
         .findById(orderId)
-        .orElseThrow(
-            () ->
-                new RestClientResponseException(
-                    "Order not found", 404, "Order not found", null, null, null));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
   }
 
   @PostMapping("/{orderId}")

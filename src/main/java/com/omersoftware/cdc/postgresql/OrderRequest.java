@@ -1,7 +1,7 @@
 package com.omersoftware.cdc.postgresql;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +19,7 @@ public class OrderRequest {
 
   @NotBlank private String customerEmail;
 
-  private Map<String, Object> customerAddress;
+  @Valid private Address customerAddress;
 
   @Builder.Default private OrderStatus status = OrderStatus.PENDING;
 }
