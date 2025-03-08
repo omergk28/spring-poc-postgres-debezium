@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class OrderEventListener {
 
-    @KafkaListener(topics = "cdc.orderdb.order", groupId = "order-group")
-    public void listen(String message) {
-        log.info("Received CDC message: " + message);
-        // Process the message
-    }
+  @KafkaListener(topics = "cdc.orderdb.order", groupId = "order-group")
+  public void listen(String message) {
+    log.info("Received CDC message: " + message);
+    // Process the message
+  }
 }

@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.1'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'com.diffplug.spotless' version '7.0.2'
 }
 
 group = 'com.omersoftware.cdc'
@@ -33,6 +34,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:postgresql:1.19.8'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.9.0'
@@ -43,6 +45,14 @@ dependencies {
 	implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
 
 	implementation 'org.springframework.kafka:spring-kafka'
+}
+
+spotless {
+	java {
+		googleJavaFormat()
+		removeUnusedImports()
+		formatAnnotations()
+	}
 }
 
 tasks.named('test') {
