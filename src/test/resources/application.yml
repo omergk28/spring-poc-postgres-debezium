@@ -1,8 +1,4 @@
-server.port: 8081
-server.servlet.context-path: /order-api
-
 spring:
-  application.name: OrderService
   jpa:
     properties:
       hibernate:
@@ -15,7 +11,6 @@ spring:
     placeholders:
       schema_name: orderdb
   datasource:
-    url: jdbc:postgresql://localhost:5432/orderdb
     username: postgres
     password: postgres
     hikari:
@@ -23,7 +18,6 @@ spring:
     driver-class-name: org.postgresql.Driver
   kafka:
     consumer:
-      bootstrap-servers: localhost:29092
       group-id: order-group
       key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
