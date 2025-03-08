@@ -1,1 +1,0 @@
-CREATE PUBLICATION order_publication FOR TABLE ${schema_name}.order;
