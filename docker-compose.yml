@@ -136,7 +136,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: orderdb
-    command: [ "postgres", "-c", "wal_level=logical" ]
+    command: [ "postgres", "-c", "wal_level=logical", "wal_keep_size=256", "max_slot_wal_keep_size=1024" ]
 
   debezium:
     image: quay.io/debezium/connect:3.0
