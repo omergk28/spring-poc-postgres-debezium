@@ -105,7 +105,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://localhost:8081/order-api/orders
 ```
 
- * update an order (only status can be updated)
+ * update an order
     
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{
