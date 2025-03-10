@@ -127,25 +127,25 @@ curl -X POST -H "Content-Type: application/json" -d '{
 curl -X DELETE http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
 ```
 
-## Debezium Monitoring
+# Debezium Monitoring
 
-# Get health check
+## Get health check
 curl -X GET http://localhost:8083/
 
-# List all connectors
+## List all connectors
 curl -X GET http://localhost:8083/connectors
 
-# Get connector status
+## Get connector status
 curl -X GET http://localhost:8083/connectors/order-connector/status
 
-# Get connector config
+## Get connector config
 curl -X GET http://localhost:8083/connectors/order-connector/config
 
-# Get connector topics
+## Get connector topics
 curl -X GET http://localhost:8083/connectors/order-connector/topics
 
 See [Debezium Monitoring](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-monitoring) for more details.
 
 ## Note
 
-Kafka [cluster setup](https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml) is taken from official Kafka Docker image repository. See [Multi Node Cluster/Isolated](https://github.com/apache/kafka/tree/trunk/docker/examples#multi-node-cluster) section for more details.
+See Kafka [cluster setup](https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml) is taken from official Kafka Docker image repository. See [Multi Node Cluster/Isolated](https://github.com/apache/kafka/tree/trunk/docker/examples#multi-node-cluster) section for more details.
