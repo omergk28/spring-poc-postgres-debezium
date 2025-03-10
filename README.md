@@ -86,11 +86,13 @@ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 
  }'
 ```
 
-4. Use [http/OrderApplication.http](http/OrderApplication.http) collection to create/update/delete orders and observe incoming CDC events in Logs.
+# Examples 
+
+Use [http/OrderApplication.http](http/OrderApplication.http) collection to create/update/delete orders and observe incoming CDC events in Logs.
 
 Alternatively, you can use the following curl commands: 
 
- * create an order
+## Create an order
 
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -105,7 +107,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
 }' http://localhost:8081/order-api/orders
 ```
 
- * update an order
+## Update an order
     
 ```shell
 curl -X POST -H "Content-Type: application/json" -d '{
@@ -121,7 +123,7 @@ curl -X POST -H "Content-Type: application/json" -d '{
     }' http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
 ```
 
- * delete an order
+## Delete an order
 
 ```shell
 curl -X DELETE http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d737cadea2c6
@@ -130,22 +132,32 @@ curl -X DELETE http://localhost:8081/order-api/orders/6d2c4d98-5aa6-4340-80d8-d7
 # Debezium Monitoring
 
 ## Get health check
+```shell
 curl -X GET http://localhost:8083/
+```
 
 ## List all connectors
+```shell
 curl -X GET http://localhost:8083/connectors
+```
 
 ## Get connector status
+```shell
 curl -X GET http://localhost:8083/connectors/order-connector/status
+```
 
 ## Get connector config
+```shell
 curl -X GET http://localhost:8083/connectors/order-connector/config
+```
 
 ## Get connector topics
+```shell
 curl -X GET http://localhost:8083/connectors/order-connector/topics
+```
 
 See [Debezium Monitoring](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-monitoring) for more details.
 
-## Note
+## Kafka 
 
-See Kafka [cluster setup](https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml) is taken from official Kafka Docker image repository. See [Multi Node Cluster/Isolated](https://github.com/apache/kafka/tree/trunk/docker/examples#multi-node-cluster) section for more details.
+Kafka [cluster setup](https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files/cluster/isolated/plaintext/docker-compose.yml) is taken from official Kafka Docker image repository. See [Multi Node Cluster/Isolated](https://github.com/apache/kafka/tree/trunk/docker/examples#multi-node-cluster) section for more details.
