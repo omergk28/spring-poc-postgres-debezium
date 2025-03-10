@@ -129,14 +129,14 @@ services:
       - controller-3
 
   postgres:
-    image: postgres:15
+    image: postgres:17
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: orderdb
-    command: [ "postgres", "-c", "wal_level=logical", "wal_keep_size=256", "max_slot_wal_keep_size=1024" ]
+    command: [ "postgres", "-c", "wal_level=logical", "-c", "wal_keep_size=256", "-c", "max_slot_wal_keep_size=1024" ]
 
   debezium:
     image: quay.io/debezium/connect:3.0
